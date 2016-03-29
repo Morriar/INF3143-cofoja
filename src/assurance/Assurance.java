@@ -15,6 +15,9 @@
  */
 package assurance;
 
+import com.google.java.contract.Invariant;
+
+@Invariant("categorie.equals(\"auto\") || categorie.equals(\"moto\")")
 public class Assurance {
 
     public String categorie;

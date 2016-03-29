@@ -15,6 +15,9 @@
  */
 package assurance;
 
+import com.google.java.contract.Invariant;
+
+@Invariant("assurance == null ? true : (categorie.equals(assurance.categorie) && valeur <= assurance.valeur)")
 public class Vehicule {
 
     public String categorie;

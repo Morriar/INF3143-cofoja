@@ -13,9 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package assurance;
 
+import com.google.java.contract.Ensures;
+import com.google.java.contract.Invariant;
+import com.google.java.contract.Requires;
+
+@Invariant("assurance == null ? true : permis.points > 0")
 public class Assure {
 
     public Permis permis;
@@ -25,6 +29,8 @@ public class Assure {
         this.permis = permis;
     }
 
+    @Requires("assurance != null")
+    @Ensures("result == assurance.vehicule.valeur")
     public Integer valeurVehicule() {
         return assurance.vehicule.valeur;
     }

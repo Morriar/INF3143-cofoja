@@ -13,17 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package assurance;
+
+import com.google.java.contract.Ensures;
+import com.google.java.contract.Requires;
 
 public class Permis {
 
     public Integer points;
 
+    @Ensures("points == 6")
     public Permis() {
         points = 6;
     }
 
+    @Requires("points > 0")
+    @Ensures("this.points == old(this.points) - points")
     public void retirerPoints(Integer points) {
         this.points -= points;
     }
