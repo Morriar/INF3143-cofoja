@@ -13,21 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package etudiant;
+
+import com.google.java.contract.Ensures;
+import com.google.java.contract.Requires;
 
 public class Etudiant {
 
     private boolean estInscrit;
 
+    @Ensures("!getEstInscrit()")
     public Etudiant() {
         estInscrit = false;
     }
 
+    @Requires("!getEstInscrit()")
+    @Ensures("getEstInscrit()")
     public void inscrire() {
         estInscrit = true;
     }
 
+    @Requires("getEstInscrit()")
+    @Ensures("!getEstInscrit()")
     public void desinscrire() {
         estInscrit = false;
     }
