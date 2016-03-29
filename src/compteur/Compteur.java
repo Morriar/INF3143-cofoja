@@ -13,10 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package compteur;
 
+import com.google.java.contract.Ensures;
+import com.google.java.contract.Invariant;
+import com.google.java.contract.Requires;
+
+@Invariant({
+    "valeurs >= 0",
+    "somme >= 0"
+})
 public class Compteur {
+
     int valeurs;
     int somme;
 
@@ -25,13 +33,23 @@ public class Compteur {
         somme = 0;
     }
 
+    @Requires("valeur >= 0")
+    @Ensures({
+        "valeurs == old(valeurs) + 1",
+        "somme == old(somme) + valeur",})
     public void ajoute(int valeur) {
         valeurs += 1;
         somme += valeur;
     }
 
+    @Requires("!isEmpty()")
     public int moyenne() {
         return somme / valeurs;
+    }
+
+    // Retourne vrai si le compteur n'a aucune valeurs.
+    public boolean isEmpty() {
+        return valeurs == 0;
     }
 
 }
