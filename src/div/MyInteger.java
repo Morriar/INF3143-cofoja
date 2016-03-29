@@ -13,8 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package div;
+
+import com.google.java.contract.Ensures;
+import com.google.java.contract.Requires;
 
 public class MyInteger {
 
@@ -24,6 +26,8 @@ public class MyInteger {
         this.value = value;
     }
 
+    @Requires("d.value != 0")
+    @Ensures("result.value == value / d.value")
     public MyInteger div(MyInteger d) {
         return new MyInteger(value / d.value);
     }
