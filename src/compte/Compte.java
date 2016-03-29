@@ -13,9 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package compte;
 
+import com.google.java.contract.Ensures;
+import com.google.java.contract.Invariant;
+import com.google.java.contract.Requires;
+
+@Invariant("getSolde() >= 0")
 public class Compte {
 
     private int solde;
@@ -24,10 +28,17 @@ public class Compte {
         solde = 0;
     }
 
+    @Requires("montant > 0")
+    @Ensures("getSolde() == old(getSolde()) + montant")
     public void crediter(int montant) {
         solde += montant;
     }
 
+    @Requires({
+        "montant > 0",
+        "getSolde() >= montant"
+    })
+    @Ensures("getSolde() == old(getSolde()) - montant")
     public void debiter(int montant) {
         solde -= montant;
     }
