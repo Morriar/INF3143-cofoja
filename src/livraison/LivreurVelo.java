@@ -15,12 +15,19 @@
  */
 package livraison;
 
+import com.google.java.contract.Ensures;
+import com.google.java.contract.Invariant;
+import com.google.java.contract.Requires;
+
 /**
  * Redéfinition de précondition et d'invariant invalide.
  */
+@Invariant("valeurAssurance() >= 10000")
 public class LivreurVelo implements Livreur {
 
     @Override
+    @Requires("colis.poids <= 3")
+    @Ensures("result <= 1")
     public int livrer(Colis colis, String destination) {
         // TODO retourner le temps de livraison
         return 1;
@@ -28,7 +35,7 @@ public class LivreurVelo implements Livreur {
 
     @Override
     public int valeurAssurance() {
-        return 10000; // ne respecte pas l'invariant de Livreur
+    	return 10000; // ne respecte pas l'invariant de Livreur
     }
 
 }

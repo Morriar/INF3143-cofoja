@@ -15,12 +15,17 @@
  */
 package livraison;
 
+import com.google.java.contract.Ensures;
+import com.google.java.contract.Requires;
+
 /**
  * Redéfinition de pré/post condition valide.
  */
 class LivreurVoiture implements Livreur {
 
     @Override
+    @Requires("colis.poids <= 10")
+    @Ensures("result <= 2")
     public int livrer(Colis colis, String destination) {
         // TODO retourner le temps de livraison
         return 2;

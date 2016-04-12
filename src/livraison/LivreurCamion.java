@@ -15,12 +15,19 @@
  */
 package livraison;
 
+import com.google.java.contract.Ensures;
+import com.google.java.contract.Invariant;
+import com.google.java.contract.Requires;
+
 /**
  * Redéfinition de postcondition invalide.
  */
+@Invariant("valeurAssurance() >= 1000000")
 public class LivreurCamion implements Livreur {
 
     @Override
+    @Requires("colis.poids <= 50")
+    @Ensures("result <= 24")
     public int livrer(Colis colis, String destination) {
         // TODO retourner le temps de livraison
         return 24;
@@ -28,6 +35,6 @@ public class LivreurCamion implements Livreur {
 
     @Override
     public int valeurAssurance() {
-        return 1000000;
+    	return 1000000;
     }
 }

@@ -15,6 +15,11 @@
  */
 package livraison;
 
+import com.google.java.contract.Ensures;
+import com.google.java.contract.Invariant;
+import com.google.java.contract.Requires;
+
+@Invariant("valeurAssurance() >= 100000")
 public interface Livreur {
 
     /**
@@ -24,6 +29,8 @@ public interface Livreur {
      * @param destination adresse de destination
      * @return temps de livraison
      */
+    @Requires("colis.poids <= 5") // Le colis ne fait pas plus de 5kg.
+    @Ensures("result <= 3") // Le colis est livré en 3h ou moins.
     public int livrer(Colis colis, String destination);
 
     /**
