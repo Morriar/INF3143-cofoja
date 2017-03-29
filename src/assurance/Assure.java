@@ -19,19 +19,27 @@ import com.google.java.contract.Ensures;
 import com.google.java.contract.Invariant;
 import com.google.java.contract.Requires;
 
-@Invariant("assurance == null ? true : permis.points > 0")
+@Invariant("getAssurance() == null ? true : getPermis().getPoints() > 0")
 public class Assure {
 
-    public Permis permis;
-    public Assurance assurance = null;
+	private Permis permis;
+	private Assurance assurance = null;
 
-    public Assure(Permis permis) {
-        this.permis = permis;
-    }
+	public Assure(Permis permis) {
+		this.permis = permis;
+	}
 
-    @Requires("assurance != null")
-    @Ensures("result == assurance.vehicule.valeur")
-    public Integer valeurVehicule() {
-        return assurance.vehicule.valeur;
-    }
+	@Requires("getAssurance() != null")
+	@Ensures("result == getAssurance().getVehicule().getValeur()")
+	public Integer valeurVehicule() {
+		return assurance.getVehicule().getValeur();
+	}
+
+	public Permis getPermis() {
+		return permis;
+	}
+
+	public Assurance getAssurance() {
+		return assurance;
+	}
 }

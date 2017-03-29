@@ -17,15 +17,34 @@ package assurance;
 
 import com.google.java.contract.Invariant;
 
-@Invariant("assurance == null ? true : (categorie.equals(assurance.categorie) && valeur <= assurance.valeur)")
+@Invariant({
+	"getAssurance() == null ? true : (getCategorie().equals(getAssurance().getCategorie()))",
+	"getAssurance() == null ? true : (getValeur() <= getAssurance().getValeur())"	
+})
 public class Vehicule {
 
-    public String categorie;
-    public Integer valeur;
-    public Assurance assurance = null;
+	private String categorie;
+	private Integer valeur;
+	private Assurance assurance = null;
 
-    public Vehicule(String categorie, Integer valeur) {
-        this.categorie = categorie;
-        this.valeur = valeur;
-    }
+	public Vehicule(String categorie, Integer valeur) {
+		this.categorie = categorie;
+		this.valeur = valeur;
+	}
+
+	public Assurance getAssurance() {
+		return assurance;
+	}
+
+	public void setAssurance(Assurance assurance) {
+		this.assurance = assurance;
+	}
+
+	public String getCategorie() {
+		return categorie;
+	}
+
+	public Integer getValeur() {
+		return valeur;
+	}
 }

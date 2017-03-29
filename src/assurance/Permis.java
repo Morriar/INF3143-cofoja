@@ -20,16 +20,23 @@ import com.google.java.contract.Requires;
 
 public class Permis {
 
-    public Integer points;
+	private Integer points;
 
-    @Ensures("points == 6")
-    public Permis() {
-        points = 6;
-    }
+	@Ensures("getPoints() == 6")
+	public Permis() {
+		points = 6;
+	}
 
-    @Requires("points > 0")
-    @Ensures("this.points == old(this.points) - points")
-    public void retirerPoints(Integer points) {
-        this.points -= points;
-    }
+	@Requires({
+		"points > 0",
+		"getPoints() >= points"
+	})
+	@Ensures("getPoints() == old(getPoints()) - points")
+	public void retirerPoints(Integer points) {
+		this.points -= points;
+	}
+
+	public Integer getPoints() {
+		return points;
+	}
 }

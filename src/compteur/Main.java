@@ -32,7 +32,7 @@ public class Main {
         c3.ajoute(-10);
         // Contrat FAIL
         Compteur c4 = new Compteur();
-        c4.somme = -100;
+        c4.setSomme(-100);
         c4.ajoute(10);
     }
 

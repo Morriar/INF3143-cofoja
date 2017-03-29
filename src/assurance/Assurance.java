@@ -17,17 +17,29 @@ package assurance;
 
 import com.google.java.contract.Invariant;
 
-@Invariant("categorie.equals(\"auto\") || categorie.equals(\"moto\")")
+@Invariant("getCategorie().equals(\"auto\") || getCategorie().equals(\"moto\")")
 public class Assurance {
 
-    public String categorie;
-    public Integer valeur;
-    public Vehicule vehicule;
+	private String categorie;
+	private Integer valeur;
+	private Vehicule vehicule;
 
-    public Assurance(String categorie, Integer valeur, Vehicule vehicule) {
-        this.categorie = categorie;
-        this.valeur = valeur;
-        this.vehicule = vehicule;
-        this.vehicule.assurance = this;
-    }
+	public Assurance(String categorie, Integer valeur, Vehicule vehicule) {
+		this.categorie = categorie;
+		this.valeur = valeur;
+		this.vehicule = vehicule;
+		this.vehicule.setAssurance(this);
+	}
+
+	public String getCategorie() {
+		return categorie;
+	}
+
+	public Integer getValeur() {
+		return valeur;
+	}
+
+	public Vehicule getVehicule() {
+		return vehicule;
+	}
 }

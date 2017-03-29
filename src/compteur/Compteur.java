@@ -20,36 +20,51 @@ import com.google.java.contract.Invariant;
 import com.google.java.contract.Requires;
 
 @Invariant({
-    "valeurs >= 0",
-    "somme >= 0"
+	"getValeurs() > 0",
+	"getSomme() >= 0"
 })
 public class Compteur {
 
-    int valeurs;
-    int somme;
+	private int valeurs;
+	private int somme;
 
-    public Compteur() {
-        valeurs = 0;
-        somme = 0;
-    }
+	public Compteur() {
+		valeurs = 0;
+		somme = 0;
+	}
 
-    @Requires("valeur >= 0")
-    @Ensures({
-        "valeurs == old(valeurs) + 1",
-        "somme == old(somme) + valeur",})
-    public void ajoute(int valeur) {
-        valeurs += 1;
-        somme += valeur;
-    }
+	@Requires("valeur >= 0")
+	@Ensures({
+		"getValeurs() == old(getValeurs()) + 1",
+		"getSomme() == old(getSomme()) + valeur"
+	})
+	public void ajoute(int valeur) {
+		valeurs += 1;
+		somme += valeur;
+	}
 
-    @Requires("!isEmpty()")
-    public int moyenne() {
-        return somme / valeurs;
-    }
+	@Requires("!isEmpty()")
+	@Ensures("result == getSomme() / getValeurs()")
+	public int moyenne() {
+		return somme / valeurs;
+	}
 
-    // Retourne vrai si le compteur n'a aucune valeurs.
-    public boolean isEmpty() {
-        return valeurs == 0;
-    }
+	// Retourne vrai si le compteur n'a aucune valeur.
+	@Ensures("result == (getValeurs() == 0)")
+	public boolean isEmpty() {
+		return valeurs == 0;
+	}
+
+	public int getSomme() {
+		return somme;
+	}
+
+	public void setSomme(int somme) {
+		this.somme = somme;
+	}
+
+	public int getValeurs() {
+		return valeurs;
+	}
 
 }

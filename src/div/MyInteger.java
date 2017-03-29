@@ -20,16 +20,20 @@ import com.google.java.contract.Requires;
 
 public class MyInteger {
 
-    public int value;
+	private int value;
 
-    public MyInteger(Integer value) {
-        this.value = value;
-    }
+	public MyInteger(Integer value) {
+		this.value = value;
+	}
 
-    @Requires("d.value != 0")
-    @Ensures("result.value == value / d.value")
-    public MyInteger div(MyInteger d) {
-        return new MyInteger(value / d.value);
-    }
+	@Requires("d.getValue() != 0")
+	@Ensures("result.getValue() == getValue() / d.getValue()")
+	public MyInteger div(MyInteger d) {
+		return new MyInteger(value / d.value);
+	}
+
+	public int getValue() {
+		return value;
+	}
 
 }
